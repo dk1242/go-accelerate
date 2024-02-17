@@ -3,9 +3,23 @@ package main
 import (
 	"fmt"
 	"sync"
-
-	"github.com/Priyanka488/calculator/api"
 )
+
+func Add(a, b int) int {
+	return a + b
+}
+
+func Subtract(a, b int) int {
+	return a - b
+}
+
+func Multiply(a, b int) int {
+	return a * b
+}
+
+func Divide(a, b int) int {
+	return a / b
+}
 
 type Task struct {
 	operation string
@@ -16,13 +30,13 @@ func calculate(i int, ch chan Task, wg *sync.WaitGroup) {
 	for task := range ch {
 		switch task.operation {
 		case "add":
-			fmt.Println("Result of addition is", api.Add(task.a, task.b), "done by goroutine", i)
+			fmt.Println("Result of addition is", Add(task.a, task.b), "done by goroutine", i)
 		case "subtract":
-			fmt.Println("Result of subtraction is", api.Subtract(task.a, task.b), "done by goroutine", i)
+			fmt.Println("Result of subtraction is", Subtract(task.a, task.b), "done by goroutine", i)
 		case "multiply":
-			fmt.Println("Result of multiplication is", api.Multiply(task.a, task.b), "done by goroutine", i)
+			fmt.Println("Result of multiplication is", Multiply(task.a, task.b), "done by goroutine", i)
 		case "divide":
-			fmt.Println("Result of division is", api.Divide(task.a, task.b), "done by goroutine", i)
+			fmt.Println("Result of division is", Divide(task.a, task.b), "done by goroutine", i)
 		}
 	}
 	wg.Done()
